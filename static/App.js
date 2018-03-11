@@ -220,6 +220,20 @@ var IssueList = function (_React$Component5) {
 	}
 
 	_createClass(IssueList, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.loadData();
+		}
+	}, {
+		key: 'loadData',
+		value: function loadData() {
+			var _this6 = this;
+
+			setTimeout(function () {
+				_this6.setState({ issues: issues });
+			}, 500);
+		}
+	}, {
 		key: 'createIssue',
 		value: function createIssue(newIssue) {
 			var newIssues = this.state.issues.slice();
@@ -249,6 +263,11 @@ var IssueList = function (_React$Component5) {
 				React.createElement(IssueFilter, null),
 				React.createElement('hr', null),
 				React.createElement(IssueTable, { issues: this.state.issues }),
+				React.createElement(
+					'button',
+					{ onClick: this.createTestIssue },
+					'Add'
+				),
 				React.createElement('hr', null),
 				React.createElement(IssueAdd, null)
 			);

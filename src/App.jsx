@@ -89,6 +89,14 @@ class IssueList extends React.Component {
 		setTimeout(this.createTestIssue, 2000);
 	}
 
+	componentDidMount() {
+		this.loadData();
+	}
+	loadData() {
+		setTimeout(() => {
+			this.setState({issues: issues});
+		}, 500);
+	}
 	createIssue(newIssue) {
 		const newIssues = this.state.issues.slice();
 		newIssue.id = this.state.issues.length + 1;
@@ -111,6 +119,7 @@ class IssueList extends React.Component {
 				<IssueFilter />
 				<hr/>
 				<IssueTable issues={this.state.issues}/>
+				<button onClick={this.createTestIssue}>Add</button>
 				<hr/>
 				<IssueAdd />
 			</div>
