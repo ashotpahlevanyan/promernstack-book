@@ -81,13 +81,36 @@ class IssueAdd extends React.Component {
 
 
 class IssueList extends React.Component {
+	constructor() {
+		super();
+
+		this.state = {issues: issues};
+		this.createTestIssue = this.createTestIssue.bind(this);
+		setTimeout(this.createTestIssue, 2000);
+	}
+
+	createIssue(newIssue) {
+		const newIssues = this.state.issues.slice();
+		newIssue.id = this.state.issues.length + 1;
+		newIssues.push(newIssue);
+		this.setState({issues: newIssues});
+	}
+
+	createTestIssue() {
+		this.createIssue({
+			status: 'New', owner: 'Pieta',
+			created: new Date(), title: 'Completion date should be optional',
+		});
+	}
+
+
 	render () {
 		return(
 			<div>
 				<h1>Issue Tracker</h1>
 				<IssueFilter />
 				<hr/>
-				<IssueTable issues={issues}/>
+				<IssueTable issues={this.state.issues}/>
 				<hr/>
 				<IssueAdd />
 			</div>
