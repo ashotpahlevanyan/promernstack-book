@@ -1,9 +1,43 @@
 const contentNode = document.getElementById('contents');
 
-const continents = ['Africa','America','Asia','Australia','Europe'];
-const br = <br />;
-const message = continents.map(c => `Hello ${c}!`).join(' ');
+class IssueFilter extends React.Component {
+	render () {
+		return(
+			<div>This is a placeholder to Filter Issues.</div>
+		);
+	}
+}
 
-const component = <p>{message}</p>;
+class IssueTable extends React.Component {
+	render () {
+		return(
+			<div>This is a placeholder for the issue Table.</div>
+		);
+	}
+}
 
-ReactDOM.render(component, contentNode);
+class IssueAdd extends React.Component {
+	render () {
+		return(
+			<div>This is a placeholder to Add Issues.</div>
+		);
+	}
+}
+
+class IssueList extends React.Component {
+	render () {
+		return(
+			<div>
+				<h1>Issue Tracker</h1>
+				<IssueFilter/>
+				<hr/>
+				<IssueTable/>
+				<hr/>
+				<IssueAdd/>
+			</div>
+		);
+	}
+}
+
+
+ReactDOM.render(<IssueList />, contentNode);
