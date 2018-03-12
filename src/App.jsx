@@ -1,18 +1,5 @@
 const contentNode = document.getElementById('contents');
 
-const issues = [
-	{
-		id: 1, status: 'Open', owner: 'Revan',
-		created: new Date('2016-08-15'), effort: 5,completionDate: undefined,
-		title: 'Error in Console when clicking add'
-	},
-	{
-		id: 2, status: 'Assigned', owner: 'Eddie',
-		created: new Date('2016-08-16'), effort: 14,completionDate: new Date('2016-08-30'),
-		title: 'Missing bottom border on panel'
-	},
-];
-
 class IssueFilter extends React.Component {
 	render () {
 		return(
@@ -101,10 +88,22 @@ class IssueList extends React.Component {
 	componentDidMount() {
 		this.loadData();
 	}
+
 	loadData() {
-		setTimeout(() => {
-			this.setState({issues: issues});
-		}, 500);
+		fetch('/api/issues/').then(response =>
+			response.json()
+		).then(data => {
+			console.log('Total Count of records: ', data._metadata.total_count);
+			data.records.forEach(issue => {
+				issue.created = new Date(issue.created);
+				if(issue.completionDate) {
+					issue.completionDate = new Date(issue.completionDate);
+				}
+			});
+			this.setState({issues: data.records});
+		}).catch(err => {
+			console.log(err);
+		});
 	}
 	createIssue(newIssue) {
 		const newIssues = this.state.issues.slice();
