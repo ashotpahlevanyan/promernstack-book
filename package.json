@@ -9,7 +9,7 @@
   },
   "scripts": {
     "compile": "webpack",
-    "watch": "webpack --watch",
+   	"watch": "webpack-dev-server  --hot --inline",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon -w server server/server.js"
   },
