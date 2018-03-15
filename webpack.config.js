@@ -1,18 +1,22 @@
+const path = require('path');
+
 module.exports = {
-	entry: './src/App.jsx',
+	entry: "./src/App.jsx",
+	devtool: 'inline-source-map',
 	output: {
-		path: './static',
-		filename: 'app.bundle.js'
+		path: path.resolve(__dirname, "static"),
+		filename: "app.bundle.js",
+		publicPath: "./",
 	},
 	module: {
-		loaders: [
+		rules: [
 			{
-				test: /\.jsx$/,
-				loader: 'babel-loader',
-				query: {
-					presets: ['react','es2015']
-				}
-			},
+				test: /\.jsx?$/,
+				loader: "babel-loader",
+				options: {
+					presets: ["react", "es2015"]
+				},
+			}
 		]
 	}
 };

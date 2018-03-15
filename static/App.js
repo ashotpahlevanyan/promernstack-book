@@ -16,29 +16,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var contentNode = document.getElementById('contents');
 
-var IssueFilter = function (_React$Component) {
-	_inherits(IssueFilter, _React$Component);
-
-	function IssueFilter() {
-		_classCallCheck(this, IssueFilter);
-
-		return _possibleConstructorReturn(this, (IssueFilter.__proto__ || Object.getPrototypeOf(IssueFilter)).apply(this, arguments));
-	}
-
-	_createClass(IssueFilter, [{
-		key: 'render',
-		value: function render() {
-			return React.createElement(
-				'div',
-				null,
-				'This is a placeholder to Filter Issues.'
-			);
-		}
-	}]);
-
-	return IssueFilter;
-}(React.Component);
-
 var IssueRow = function IssueRow(props) {
 	return React.createElement(
 		'tr',
@@ -139,17 +116,17 @@ function IssueTable(props) {
 	);
 }
 
-var IssueList = function (_React$Component2) {
-	_inherits(IssueList, _React$Component2);
+var IssueList = function (_React$Component) {
+	_inherits(IssueList, _React$Component);
 
 	function IssueList() {
 		_classCallCheck(this, IssueList);
 
-		var _this2 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
+		var _this = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
 
-		_this2.state = { issues: [] };
-		_this2.createIssue = _this2.createIssue.bind(_this2);
-		return _this2;
+		_this.state = { issues: [] };
+		_this.createIssue = _this.createIssue.bind(_this);
+		return _this;
 	}
 
 	_createClass(IssueList, [{
@@ -160,7 +137,7 @@ var IssueList = function (_React$Component2) {
 	}, {
 		key: 'loadData',
 		value: function loadData() {
-			var _this3 = this;
+			var _this2 = this;
 
 			fetch('/api/issues/').then(function (response) {
 				if (response.ok) {
@@ -172,7 +149,7 @@ var IssueList = function (_React$Component2) {
 								issue.completionDate = new Date(issue.completionDate);
 							}
 						});
-						_this3.setState({ issues: data.records });
+						_this2.setState({ issues: data.records });
 					});
 				} else {
 					response.json().then(function (error) {
@@ -186,7 +163,7 @@ var IssueList = function (_React$Component2) {
 	}, {
 		key: 'createIssue',
 		value: function createIssue(newIssue) {
-			var _this4 = this;
+			var _this3 = this;
 
 			fetch('/api/issues/', {
 				method: 'POST',
@@ -199,8 +176,8 @@ var IssueList = function (_React$Component2) {
 						if (updatedIssue.completionDate) {
 							updatedIssue.completionDate = new Date(updatedIssue.completionDate);
 						}
-						var newIssues = _this4.state.issues.concat(updatedIssue);
-						_this4.setState({ issues: newIssues });
+						var newIssues = _this3.state.issues.concat(updatedIssue);
+						_this3.setState({ issues: newIssues });
 					});
 				} else {
 					response.json().then(function (error) {
