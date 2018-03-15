@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
 
 	entry: {
-		app: "./src/App.jsx",
+		app: ["./src/App.jsx"],
 		// vendor: ['react', 'react-dom', 'whatwg-fetch'],
 	},
 	devtool: 'inline-source-map',
@@ -39,9 +39,7 @@ module.exports = {
 			}
 		}
 	},
-	// plugins: [
-	// 	new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})
-	// ],
+	plugins: [],
 	module: {
 		rules: [
 			{
