@@ -8,6 +8,15 @@ module.exports = {
 		// vendor: ['react', 'react-dom', 'whatwg-fetch'],
 	},
 	devtool: 'inline-source-map',
+	devServer : {
+		port : 8000,
+		contentBase: 'static',
+		proxy: {
+			'/api/*': {
+				target: 'http://localhost:3000/'
+			}
+		}
+	},
 	output: {
 		path: path.resolve(__dirname, "static"),
 		publicPath: "./",
