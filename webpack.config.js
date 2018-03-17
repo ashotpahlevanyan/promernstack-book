@@ -5,7 +5,7 @@ module.exports = {
 
   entry: {
     app: ['./src/App.jsx'],
-    // vendor: ['react', 'react-dom', 'whatwg-fetch'],
+    // vendor: ['react', 'react-dom', 'whatwg-fetch', 'react-router'],
   },
   devtool: 'inline-source-map',
   devServer: {
