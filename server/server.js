@@ -60,7 +60,7 @@ app.get('*', (req, res) => {
 });
 
 MongoClient.connect('mongodb://localhost/issuetracker').then((connection) => {
-  db = connection;
+  db = connection.db('issuetracker');
   app.listen(3000, () => {
     console.log('App started on port 3000');
   });
