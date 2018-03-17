@@ -1,9 +1,9 @@
-
-
 import React from 'react';
 import 'whatwg-fetch';
+import PropTypes from 'prop-types';
 import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
+
 
 export default class IssueList extends React.Component {
   constructor() {
@@ -112,3 +112,20 @@ function IssueTable(props) {
     </table>
   );
 }
+
+IssueRow.propTypes = {
+  issue: PropTypes.shape({
+    owner: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    _id: PropTypes.string,
+    status: PropTypes.string,
+    created: PropTypes.string,
+    effort: PropTypes.number,
+    completionDate: PropTypes.string,
+  }).isRequired,
+};
+
+IssueTable.propTypes = {
+  issues: PropTypes.arrayOf({
+  }).isRequired,
+};

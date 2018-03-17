@@ -1,6 +1,7 @@
 //  'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class IssueAdd extends React.Component {
   constructor() {
@@ -35,4 +36,6 @@ export default class IssueAdd extends React.Component {
   }
 }
 
-
+IssueAdd.propTypes = {
+  createIssue: PropTypes.func.isRequired,
+};

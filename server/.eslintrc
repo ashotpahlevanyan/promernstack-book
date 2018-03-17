@@ -2,6 +2,7 @@
 	"env": {
 		"node": true
 	}, "rules": {
-		"no-console": ["off"]
+		"no-console": ["off"],
+	  "prefer-destructuring": ["error", {"object": false, "array": false}]
 	}
 }

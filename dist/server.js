@@ -3,17 +3,17 @@
 //  'use strict';
 
 const bodyParser = require('body-parser');
-
 const express = require('express');
-
-const app = express();
-
 const MongoClient = require('mongodb').MongoClient;
 const Issue = require('./issue.js');
-
 require('babel-polyfill');
-
 const SourceMapSupport = require('source-map-support');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const config = require('../webpack.config');
+
+const app = express();
 
 SourceMapSupport.install();
 
@@ -23,10 +23,6 @@ app.use(express.static('static'));
 app.use(bodyParser.json());
 
 if (process.env.NODE_ENV !== 'production') {
-  const webpack = require('webpack');
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require('webpack-hot-middleware');
-  const config = require('../webpack.config');
   config.entry.app.push('webpack-hot-middleware/client', 'webpack/hot/only-dev-server');
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
   const bundler = webpack(config);
@@ -57,7 +53,7 @@ app.post('/api/issues/', (req, res) => {
     return;
   }
 
-  db.collection('issues').insertOne(newIssue).then(result => db.collection('issues').find({ _id: result.insertedId }).limit(1).next()).then(newIssue1 => {
+  db.collection('issues').insertOne(Issue.cleanupIssue(newIssue)).then(result => db.collection('issues').find({ _id: result.insertedId }).limit(1).next()).then(newIssue1 => {
     res.json(newIssue1);
   }).catch(error => {
     console.log(error);
