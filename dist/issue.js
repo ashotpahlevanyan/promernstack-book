@@ -1,9 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 const validIssueStatus = {
   New: true,
   Open: true,
@@ -42,7 +38,7 @@ function validateIssue(issue) {
   }
   return errors.length ? errors.join('; ') : null;
 }
-exports.default = {
+module.exports = {
   validateIssue,
   cleanupIssue
 };
