@@ -5,8 +5,8 @@ import 'babel-polyfill';
 import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { MongoClient } from 'mongodb';
-import Issue from './issue';
+const MongoClient = require('mongodb').MongoClient;
+import Issue from './issue.js';
 
 SourceMapSupport.install();
 
