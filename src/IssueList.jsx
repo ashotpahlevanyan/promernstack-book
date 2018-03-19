@@ -32,11 +32,11 @@ export default class IssueList extends React.Component {
 				});
 			} else {
 				response.json().then(error => {
-					alert('Failed to fetch issue: ', error.message);
+					alert('Failed to fetch issue: ' + error.message);
 				});
 			}
 		}).catch(err => {
-			alert("Error in fetching data from server", err);
+			alert("Error in fetching data from server" + err);
 		});
 	}
 

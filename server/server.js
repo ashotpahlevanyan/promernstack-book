@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 
 const MongoClient = require('mongodb').MongoClient;
-const Issue = require('./issue.js')
+const Issue = require('./issue.js');
 
 let db;
 
@@ -57,5 +57,3 @@ MongoClient.connect('mongodb://localhost/issuetracker').then(connection => {
 }).catch(error => {
 	console.log('ERROR', error);
 });
-
-
