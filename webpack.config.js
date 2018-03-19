@@ -13,9 +13,10 @@ module.exports = {
 		contentBase: 'static',
 		proxy: {
 			'/api/*': {
-				target: 'http://localhost:3000/'
+				target: 'http://localhost:3000'
 			}
-		}
+		},
+		hot: true
 	},
 	output: {
 		path: path.resolve(__dirname, "static"),
