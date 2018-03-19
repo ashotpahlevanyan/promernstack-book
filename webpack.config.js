@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-
 	entry: {
 		app: "./src/App.jsx",
 		// vendor: ['react', 'react-dom', 'whatwg-fetch'],
@@ -40,9 +39,9 @@ module.exports = {
 			}
 		}
 	},
-	// plugins: [
-	// 	new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})
-	// ],
+	plugins: [
+		new webpack.HotModuleReplacementPlugin()
+	],
 	module: {
 		rules: [
 			{
