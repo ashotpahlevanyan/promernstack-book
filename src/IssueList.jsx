@@ -11,14 +11,24 @@ export default class IssueList extends React.Component {
 
     this.state = { issues: [] };
     this.createIssue = this.createIssue.bind(this);
+    this.loadData = this.loadData.bind(this);
   }
 
   componentDidMount() {
     this.loadData();
   }
 
+  componentDidUpdate(prevProps) {
+    const oldQuery = prevProps.location;
+    const newQuery = this.props.location;
+    if(oldQuery.search === newQuery.search) {
+      return;
+    }
+    this.loadData();
+  }
+
   loadData() {
-    fetch('/api/issues/').then((response) => {
+    fetch(`/api/issues${this.props.location.search}`).then((response) => {
       if (response.ok) {
         response.json().then((data) => {
           //  console.log('Total Count of records: ', data._metadata.total_count);
@@ -131,3 +141,9 @@ IssueTable.propTypes = {
   issues: PropTypes.arrayOf({
   }).isRequired,
 };
+
+IssueList.propTypes = {
+  location: PropTypes.shape({
+  }).isRequired,
+};
+
