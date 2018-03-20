@@ -18,7 +18,7 @@ module.exports = {
     },
   },
   output: {
-    path: path.resolve(__dirname, 'static'),
+    path: path.resolve(__dirname, './static'),
     publicPath: './',
   },
   optimization: {
