@@ -12,10 +12,11 @@ module.exports = {
     port: 8000,
     contentBase: 'static',
     proxy: {
-      '/api/*': {
+      '/api/**': {
         target: 'http://localhost:3000/',
       },
     },
+    historyApiFallback: true,
   },
   output: {
     path: path.resolve(__dirname, './static'),
