@@ -18,14 +18,13 @@ var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _issue = require('./issue.js');
+var _issue = require('./issue');
 
 var _issue2 = _interopRequireDefault(_issue);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const MongoClient = require('mongodb').MongoClient;
-
 
 _sourceMapSupport2.default.install();
 

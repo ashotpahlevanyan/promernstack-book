@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
 
-
 export default class IssueList extends React.Component {
   constructor() {
     super();
@@ -33,11 +32,11 @@ export default class IssueList extends React.Component {
         });
       } else {
         response.json().then((error) => {
-          alert('Failed to fetch issue: ' + error.message);
+          alert(`Failed to fetch issue: ${error.message}`);
         });
       }
     }).catch((err) => {
-      alert('Error in fetching data from server' + err);
+      alert(`Error in fetching data from server + ${err.message}`);
     });
   }
 

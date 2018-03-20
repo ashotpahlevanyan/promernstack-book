@@ -14,7 +14,9 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
 }
 
 IssueEdit.propTypes = {
-  params: PropTypes.shape({
-    id: PropTypes.string,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
   }).isRequired,
 };
