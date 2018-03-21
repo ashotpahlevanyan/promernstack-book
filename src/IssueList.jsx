@@ -21,7 +21,7 @@ class IssueList extends React.Component {
   }
 
   setFilter(query) {
-    this.props.history.push({pathname: this.props.location.pathname, query});
+    this.props.history.push({pathname: this.props.location.pathname, search: query.status ? 'status='+ query.status : ''});
   }
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class IssueList extends React.Component {
     const oldQuery = prevProps.location;
     const newQuery = this.props.location;
     console.log(newQuery);
-    if(oldQuery.query == newQuery.query) {
+    if(oldQuery.search === newQuery.search) {
       return;
     }
 
