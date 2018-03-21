@@ -20,6 +20,7 @@ class IssueList extends React.Component {
     this.setFilter({});
   }
 
+
   setFilter(query) {
     this.props.history.push({pathname: this.props.location.pathname, search: query.status ? 'status='+ query.status : ''});
   }
