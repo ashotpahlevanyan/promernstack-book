@@ -1,22 +1,27 @@
 import React from 'react';
 import 'whatwg-fetch';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+
 import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
 
-export default class IssueList extends React.Component {
-  constructor() {
-    super();
+class IssueList extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-    this.state = { issues: [] };
+    this.state = {
+      issues: [],
+    };
+
     this.createIssue = this.createIssue.bind(this);
     this.loadData = this.loadData.bind(this);
     this.setFilter = this.setFilter.bind(this);
+    this.setFilter({});
   }
 
   setFilter(query) {
-    this.props.router.push({pathname: this.props.location.pathname, query});
+    this.props.history.push({pathname: this.props.location.pathname, query});
   }
 
   componentDidMount() {
@@ -26,9 +31,11 @@ export default class IssueList extends React.Component {
   componentDidUpdate(prevProps) {
     const oldQuery = prevProps.location;
     const newQuery = this.props.location;
-    if(oldQuery.search === newQuery.search) {
+    console.log(newQuery);
+    if(oldQuery.query == newQuery.query) {
       return;
     }
+
     this.loadData();
   }
 
@@ -150,6 +157,6 @@ IssueTable.propTypes = {
 IssueList.propTypes = {
   location: PropTypes.shape({
   }).isRequired,
-  router: PropTypes.shape({}),
 };
 
+export default IssueList;
