@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, Switch, Link /* withRouter, Redirect */ } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link, withRouter /* Redirect */ } from 'react-router-dom';
 import IssueList from './IssueList.jsx';
 import IssueEdit from './IssueEdit.jsx';
 import { Home, Header, Footer } from './Common.jsx';
@@ -31,7 +31,7 @@ const RoutedApp = () => (
       <hr />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/issues" component={IssueList} />
+        <Route exact path="/issues" component={withRouter(IssueList)} />
         <Route exact path="/issues/:id" component={IssueEdit} />
         <Route path="/articles" component={Articles} />
         <Route path="/*" component={NotFound} />
