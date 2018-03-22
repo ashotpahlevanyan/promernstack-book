@@ -1,8 +1,5 @@
-
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 export default class IssueFilter extends React.Component { // eslint-disable-line
   constructor() {
@@ -15,30 +12,28 @@ export default class IssueFilter extends React.Component { // eslint-disable-lin
 
   setFilterOpen(e) {
     e.preventDefault();
-    this.props.setFilter({status: 'Open'});
+    this.props.setFilter({ status: 'Open' });
   }
   setFilterAssigned(e) {
     e.preventDefault();
-    this.props.setFilter({status: 'Assigned'});
+    this.props.setFilter({ status: 'Assigned' });
   }
   clearFilter(e) {
     e.preventDefault();
     this.props.setFilter({});
   }
 
-
-
   render() {
     const Separator = () => <span> | </span>;
     return (
       <div>
-        <a href='#' onClick={this.clearFilter}>All Issues</a>
+        <button onClick={this.clearFilter}>All Issues</button>
         <Separator />
-        <a href='#' onClick={this.setFilterOpen}>
+        <button onClick={this.setFilterOpen}>
           Open Issues
-        </a>
-        <Separator/>
-        <a href='#' onClick={this.setFilterAssigned}>Assigned Issues</a>
+        </button>
+        <Separator />
+        <button onClick={this.setFilterAssigned}>Assigned Issues</button>
       </div>
     );
   }

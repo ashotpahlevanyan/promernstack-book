@@ -1,7 +1,7 @@
 import React from 'react';
 import 'whatwg-fetch';
 import PropTypes from 'prop-types';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
@@ -20,10 +20,6 @@ class IssueList extends React.Component {
     this.setFilter({});
   }
 
-  setFilter(query) {
-    this.props.history.push({pathname: this.props.location.pathname, search: query.status ? 'status='+ query.status : ''});
-  }
-
   componentDidMount() {
     this.loadData();
   }
@@ -31,12 +27,15 @@ class IssueList extends React.Component {
   componentDidUpdate(prevProps) {
     const oldQuery = prevProps.location;
     const newQuery = this.props.location;
-    console.log(newQuery);
-    if(oldQuery.search === newQuery.search) {
+    if (oldQuery.search === newQuery.search) {
       return;
     }
 
     this.loadData();
+  }
+
+  setFilter(query) {
+    this.props.history.push({ pathname: this.props.location.pathname, search: query.status ? `status=${query.status}` : '' });
   }
 
   loadData() {
@@ -90,8 +89,7 @@ class IssueList extends React.Component {
   render() {
     return (
       <div>
-        <h1>Issue Tracker</h1>
-        <IssueFilter setFilter={this.setFilter}/>
+        <IssueFilter setFilter={this.setFilter} />
         <hr />
         <IssueTable issues={this.state.issues} />
         <hr />
@@ -156,6 +154,11 @@ IssueTable.propTypes = {
 
 IssueList.propTypes = {
   location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
