@@ -7,17 +7,30 @@ import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
 
 class IssueList extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  static constructQuery(query) {
+    const stat = query.status ? `status=${query.status}` : '';
+    const effortGte = query.effort_gte ? `&effort_gte=${query.effort_gte}` : '';
+    const effortLte = query.effort_lte ? `&effort_lte=${query.effort_lte}` : '';
+    const searchQuery = `${stat}${effortGte}${effortLte}`;
+    return searchQuery;
+  }
+
+  constructor(props) {
+    super(props);
 
     this.state = {
       issues: [],
+      query: {
+        status: '',
+        effort_gte: '',
+        effort_lte: '',
+      },
     };
-
     this.createIssue = this.createIssue.bind(this);
     this.loadData = this.loadData.bind(this);
     this.setFilter = this.setFilter.bind(this);
-    this.setFilter({});
+
+    this.setFilter(this.state.query);
   }
 
   componentDidMount() {
@@ -27,6 +40,7 @@ class IssueList extends React.Component {
   componentDidUpdate(prevProps) {
     const oldQuery = prevProps.location;
     const newQuery = this.props.location;
+
     if (oldQuery.search === newQuery.search) {
       return;
     }
@@ -35,7 +49,15 @@ class IssueList extends React.Component {
   }
 
   setFilter(query) {
-    this.props.history.push({ pathname: this.props.location.pathname, search: query.status ? `status=${query.status}` : '' });
+    this.setState({
+      query,
+    });
+
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      search: IssueList.constructQuery(query),
+      query,
+    });
   }
 
   loadData() {
@@ -89,7 +111,10 @@ class IssueList extends React.Component {
   render() {
     return (
       <div>
-        <IssueFilter setFilter={this.setFilter} />
+        <IssueFilter
+          setFilter={this.setFilter}
+          initFilter={this.state.query}
+        />
         <hr />
         <IssueTable issues={this.state.issues} />
         <hr />
@@ -156,6 +181,7 @@ IssueList.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
     search: PropTypes.string.isRequired,
+    query: PropTypes.shape({}).isRequired,
   }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
