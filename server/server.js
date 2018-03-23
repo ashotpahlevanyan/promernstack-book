@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import Issue from './issue';
 
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 
 SourceMapSupport.install();
 
@@ -62,6 +63,30 @@ app.post('/api/issues', (req, res) => {
       console.log(error);
       res.status(500).json({ message: `Internal Server Error: ${error}` });
     });
+});
+
+app.get('/api/issues/:id', (req, res) => {
+  let issueId;
+  try {
+    issueId = new ObjectID(req.params.id);
+  } catch (error) {
+    res.status(422).json({ message: `Invalid issue Id format: ${error}` });
+    return;
+  }
+
+  db.collection('issues').find({_id: issueId}).limit(1)
+  .next()
+  .then(issue => {
+    if(!issue) {
+      res.status(404).json({ message: `No such issue: ${issueId}` });
+    } else {
+      res.json(issue);
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).json({ message: `Internal Server error: ${error}` });
+  });
 });
 
 app.get('*', (req, res) => {

@@ -39,6 +39,7 @@ class IssueFilter extends React.Component { // eslint-disable-line
       this.setState({ effort_gte: e.target.value, changed: true });
     }
   }
+
   onChangeEffortLte(e) {
     const effortString = e.target.value;
     if (effortString.match(/^\d*$/)) {
@@ -114,7 +115,6 @@ class IssueFilter extends React.Component { // eslint-disable-line
     );
   }
 }
-
 
 IssueFilter.propTypes = {
   setFilter: PropTypes.func.isRequired,
