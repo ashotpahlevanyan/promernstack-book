@@ -40,9 +40,9 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
 
   loadData() {
     fetch(`/api/issues/${this.props.match.params.id}`)
-      .then(response => {
-        if(response.ok) {
-          response.json().then(issue => {
+      .then((response) => {
+        if (response.ok) {
+          response.json().then((issue) => {
             issue.created = new Date(issue.created).toDateString();
             issue.completionDate = issue.completionDate != null ?
               new Date(issue.completionDate).toDateString() : '';
@@ -50,17 +50,17 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
             this.setState({ issue });
           });
         } else {
-          response.json().then(error => {
+          response.json().then((error) => {
             alert(`Failed to fetch issue : ${error.message}`);
           });
         }
-      }).catch(err => {
+      }).catch((err) => {
         alert(`Error in fetching data from server : ${err.message}`);
-    });
+      });
   }
 
   render() {
-    const issue = this.state.issue;
+    const { issue } = this.state.issue;
     return (
       <div>
         <form>
@@ -72,7 +72,8 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
           <select
             name="status"
             value={issue.status}
-            onChange={this.onChange}>
+            onChange={this.onChange}
+          >
             <option value="New">New</option>
             <option value="Open">Open</option>
             <option value="Assigned">Assigned</option>

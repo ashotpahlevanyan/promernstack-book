@@ -74,19 +74,19 @@ app.get('/api/issues/:id', (req, res) => {
     return;
   }
 
-  db.collection('issues').find({_id: issueId}).limit(1)
-  .next()
-  .then(issue => {
-    if(!issue) {
-      res.status(404).json({ message: `No such issue: ${issueId}` });
-    } else {
-      res.json(issue);
-    }
-  })
-  .catch(error => {
-    console.log(error);
-    res.status(500).json({ message: `Internal Server error: ${error}` });
-  });
+  db.collection('issues').find({ _id: issueId }).limit(1)
+    .next()
+    .then((issue) => {
+      if (!issue) {
+        res.status(404).json({ message: `No such issue: ${issueId}` });
+      } else {
+        res.json(issue);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ message: `Internal Server error: ${error}` });
+    });
 });
 
 app.get('*', (req, res) => {
