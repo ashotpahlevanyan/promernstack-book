@@ -20,6 +20,7 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
         created: '',
       },
     };
+
     this.onChange = this.onChange.bind(this);
     this.loadData = this.loadData.bind(this);
   }
@@ -64,7 +65,7 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
   }
 
   render() {
-    const { issue } = this.state.issue;
+    const issue = this.state.issue;
     return (
       <div>
         <form>
