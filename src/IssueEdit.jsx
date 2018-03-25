@@ -48,7 +48,7 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
 
   onValidityChange(event, valid) {
     const invalidFields = Object.assign({}, this.state.invalidFields);
-    if(!valid) {
+    if (!valid) {
       invalidFields[event.target.name] = true;
     } else {
       delete invalidFields[event.target.name];
@@ -79,8 +79,8 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
 
   render() {
     const issue = this.state.issue;
-    const validationMessage = Object.keys(this.state.invalidFields).
-      length === 0 ? null :
+    const validationMessage = Object.keys(this.state.invalidFields)
+      .length === 0 ? null :
       (<div className="error">Please correct invalid fields before submitting</div>);
 
     return (
