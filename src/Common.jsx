@@ -17,27 +17,28 @@ const Header = () => (
       <Navbar.Brand>Issue Tracker</Navbar.Brand>
     </Navbar.Header>
     <Nav>
-      <LinkContainer to="/">
-        <NavItem>Home</NavItem>
-      </LinkContainer>
-      <LinkContainer to="/issues">
-        <NavItem>Issues</NavItem>
-      </LinkContainer>
-      <LinkContainer to="/reports">
-        <NavItem>Reports</NavItem>
-      </LinkContainer>
-      <LinkContainer to="/articles">
-        <NavItem>Articles</NavItem>
-      </LinkContainer>
+      <NavItem href="/">
+        Home
+      </NavItem>
+      <NavItem href="/issues">
+        Issues
+      </NavItem>
+      <NavItem href="/reports">
+        Reports
+      </NavItem>
+      <NavItem href="/articles">
+        Articles
+      </NavItem>
     </Nav>
     <Nav pullRight>
       <NavItem><FontAwesomeIcon icon={faPlus} /> Create Issue</NavItem>
-      <NavDropdown id="user-dropdown" title={<FontAwesomeIcon icon={faEllipsisH} noCaret/>} >
+      <NavDropdown id="user-dropdown" title={<FontAwesomeIcon icon={faEllipsisH} />} noCaret>
         <MenuItem>Logout</MenuItem>
       </NavDropdown>
     </Nav>
   </Navbar>
 );
+
 const Footer = () => (
   <div className="footer">
     <h5>
