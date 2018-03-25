@@ -14,7 +14,7 @@ const contentNode = document.getElementById('contents');
 
 const RoutedApp = () => (
   <Router>
-    <div>
+    <div className="container">
       <Header />
       <ul>
         <li>
