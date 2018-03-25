@@ -89,7 +89,7 @@ app.get('/api/issues/:id', (req, res) => {
     });
 });
 
-app.post('/api/issue/:id', (req, res) => {
+app.put('/api/issues/:id', (req, res) => {
   let issueId;
   try {
     issueId = new ObjectID(req.params.id);

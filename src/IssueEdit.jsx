@@ -18,7 +18,7 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
         owner: '',
         effort: null,
         completionDate: '',
-        created: '',
+        created: null,
       },
       invalidFields: {},
     };
@@ -26,6 +26,7 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
     this.onChange = this.onChange.bind(this);
     this.loadData = this.loadData.bind(this);
     this.onValidityChange = this.onValidityChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -56,12 +57,39 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
     this.setState({ invalidFields });
   }
 
+  onSubmit(event) {
+    event.preventDefault();
+
+    if (Object.keys(this.state.invalidFields).length !== 0) {
+      return;
+    }
+
+    fetch(`/api/issues/${this.props.match.params.id}`, {
+      method: 'put',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(this.state.issue),
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((updatedIssue) => {
+          updatedIssue.created = new Date(updatedIssue.created);
+          if (updatedIssue.completionDate) {
+            updatedIssue.completionDate = new Date(updatedIssue.completionDate);
+          }
+          this.setState({ issue: updatedIssue });
+          alert('Updated Issue Successfully');
+        });
+      }
+    }).catch((err) => {
+      alert(`Error in sending data to server: ${err.message}`);
+    });
+  }
+
   loadData() {
     fetch(`/api/issues/${this.props.match.params.id}`)
       .then((response) => {
         if (response.ok) {
           response.json().then((issue) => {
-            issue.created = new Date(issue.created).toDateString();
+            issue.created = new Date(issue.created);
             issue.completionDate = issue.completionDate != null ?
               new Date(issue.completionDate).toDateString() : '';
             // issue.effort = issue.effort != null ? issue.effort.toString() : '';
@@ -85,10 +113,10 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
 
     return (
       <div>
-        <form>
+        <form onSubmit={this.onSubmit}>
           ID: {issue._id}
           <br />
-          Created: {issue.created}
+          Created: {issue.created ? issue.created.toDateString() : ''}
           <br />
           Status:
           <select
