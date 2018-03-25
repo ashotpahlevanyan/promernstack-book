@@ -17,18 +17,18 @@ const Header = () => (
       <Navbar.Brand>Issue Tracker</Navbar.Brand>
     </Navbar.Header>
     <Nav>
-      <NavItem href="/">
-        Home
-      </NavItem>
-      <NavItem href="/issues">
-        Issues
-      </NavItem>
-      <NavItem href="/reports">
-        Reports
-      </NavItem>
-      <NavItem href="/articles">
-        Articles
-      </NavItem>
+      <LinkContainer to="/">
+        <NavItem>Home</NavItem>
+      </LinkContainer>
+      <LinkContainer to="/issues">
+        <NavItem>Issues</NavItem>
+      </LinkContainer>
+      <LinkContainer to="/reports">
+        <NavItem>Reports</NavItem>
+      </LinkContainer>
+      <LinkContainer to="/articles">
+        <NavItem>Articles</NavItem>
+      </LinkContainer>
     </Nav>
     <Nav pullRight>
       <NavItem><FontAwesomeIcon icon={faPlus} /> Create Issue</NavItem>
