@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import NumInput from './NumInput.jsx';
+import DateInput from './DateInput.jsx';
 
 
 export default class IssueEdit extends React.Component { // eslint-disable-line
@@ -19,10 +20,12 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
         completionDate: '',
         created: '',
       },
+      invalidFields: {},
     };
 
     this.onChange = this.onChange.bind(this);
     this.loadData = this.loadData.bind(this);
+    this.onValidityChange = this.onValidityChange.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +44,16 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
       convertedValue : event.target.value;
     issue[event.target.name] = value;
     this.setState({ issue });
+  }
+
+  onValidityChange(event, valid) {
+    const invalidFields = Object.assign({}, this.state.invalidFields);
+    if(!valid) {
+      invalidFields[event.target.name] = true;
+    } else {
+      delete invalidFields[event.target.name];
+    }
+    this.setState({ invalidFields });
   }
 
   loadData() {
@@ -66,6 +79,10 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
 
   render() {
     const issue = this.state.issue;
+    const validationMessage = Object.keys(this.state.invalidFields).
+      length === 0 ? null :
+      (<div className="error">Please correct invalid fields before submitting</div>);
+
     return (
       <div>
         <form>
@@ -104,11 +121,11 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
           />
           <br />
           Completion date:
-          <input
-            type="text"
+          <DateInput
             name="completionDate"
             value={issue.completionDate}
             onChange={this.onChange}
+            onValidityChange={this.onValidityChange}
           />
           <br />
           Title:
@@ -120,6 +137,7 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
             onChange={this.onChange}
           />
           <br />
+          {validationMessage}
           <button type="submit">Submit</button>
           <br />
           <Link to="/issues">Back to issue list</Link>

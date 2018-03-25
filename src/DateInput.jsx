@@ -25,6 +25,7 @@ export default class DateInput extends React.Component {
 
     this.onBlur = this.onBlur.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onFocus = this.onFocus.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -76,13 +77,9 @@ export default class DateInput extends React.Component {
 }
 
 DateInput.propTypes = {
-  value: PropTypes.shape({}),
+  value: PropTypes.shape({}).isRequired,
   onChange: PropTypes.func.isRequired,
-  onValidityChange: PropTypes.func,
+  onValidityChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
 };
 
-DateInput.defaultProps = {
-  value: '',
-  onValidityChange: () => {},
-};
