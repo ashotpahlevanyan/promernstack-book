@@ -2,6 +2,7 @@ import React from 'react';
 import 'whatwg-fetch';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
