@@ -135,7 +135,7 @@ app.delete('/api/issues/:id', (req, res) => {
     if (deleteResult.result.n === 1) {
       res.json({ status: 'OK' });
     } else {
-      res.json({ status: `Warning: object not found` });
+      res.json({ status: 'Warning: object not found' });
     }
   }).catch(error => {
     console.log(error);

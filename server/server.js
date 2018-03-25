@@ -123,20 +123,20 @@ app.delete('/api/issues/:id', (req, res) => {
   try {
     issueId = new ObjectID(req.params.id);
   } catch (error) {
-    res.status(422).json({ message: `Invalid issue ID format: ${error}`});
+    res.status(422).json({ message: `Invalid issue ID format: ${error}` });
     return;
   }
   db.collection('issues').deleteOne({ _id: issueId })
     .then((deleteResult) => {
-      if(deleteResult.result.n === 1) {
-        res.json({ status: 'OK'});
+      if (deleteResult.result.n === 1) {
+        res.json({ status: 'OK' });
       } else {
-        res.json({ status: `Warning: object not found`});
+        res.json({ status: 'Warning: object not found' });
       }
     })
     .catch((error) => {
       console.log(error);
-      res.status(500).json({ message: `Internal server error: ${error}`});
+      res.status(500).json({ message: `Internal server error: ${error}` });
     });
 });
 

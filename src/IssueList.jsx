@@ -114,8 +114,8 @@ class IssueList extends React.Component {
 
   deleteIssue(id) {
     fetch(`/api/issues/${id}`, { method: 'DELETE' }).then((response) => {
-      if(!response.ok) {
-        alert(`Failed to delete issue`);
+      if (!response.ok) {
+        alert('Failed to delete issue');
       } else {
         this.loadData();
       }
@@ -142,23 +142,23 @@ const IssueRow = (props) => {
   function onDeleteClick() {
     props.deleteIssue(props.issue._id);
   }
-  return(
-  <tr>
-    <td>
-      <Link to={`/issues/${props.issue._id}`}>{props.issue._id.substr(-4)}</Link>
-    </td>
-    <td>{props.issue.status}</td>
-    <td>{props.issue.owner}</td>
-    <td>{props.issue.created.toDateString()}</td>
-    <td>{props.issue.effort}</td>
-    <td>{props.issue.completionDate ? props.issue.completionDate.toDateString() : ''}</td>
-    <td>{props.issue.title}</td>
-    <td>
-      <Button bsSize="xsmall" onClick={onDeleteClick}>
-        <FontAwesomeIcon icon={faTrashAlt} />
-      </Button>
-    </td>
-  </tr>
+  return (
+    <tr>
+      <td>
+        <Link to={`/issues/${props.issue._id}`}>{props.issue._id.substr(-4)}</Link>
+      </td>
+      <td>{props.issue.status}</td>
+      <td>{props.issue.owner}</td>
+      <td>{props.issue.created.toDateString()}</td>
+      <td>{props.issue.effort}</td>
+      <td>{props.issue.completionDate ? props.issue.completionDate.toDateString() : ''}</td>
+      <td>{props.issue.title}</td>
+      <td>
+        <Button bsSize="xsmall" onClick={onDeleteClick}>
+          <FontAwesomeIcon icon={faTrashAlt} />
+        </Button>
+      </td>
+    </tr>
   );
 };
 
@@ -176,7 +176,7 @@ function IssueTable(props) {
           <th>Effort</th>
           <th>Completion date</th>
           <th>Title</th>
-          <th></th>
+          <th />
         </tr>
       </thead>
       <tbody>
