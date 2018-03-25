@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch, Link, withRouter /* Redirect */ } from 'react-router-dom';
 import IssueList from './IssueList.jsx';
 import IssueEdit from './IssueEdit.jsx';
@@ -16,18 +15,6 @@ const RoutedApp = () => (
   <Router>
     <div className="container">
       <Header />
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/issues">Issues</Link>
-        </li>
-        <li>
-          <Link to="/articles">Articles</Link>
-        </li>
-      </ul>
-
       <hr />
       <Switch>
         <Route exact path="/" component={Home} />
