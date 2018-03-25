@@ -2,7 +2,7 @@ import React from 'react';
 import 'whatwg-fetch';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Table, Panel } from 'react-bootstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt.js';
 
@@ -125,13 +125,22 @@ class IssueList extends React.Component {
   render() {
     return (
       <div>
-        <IssueFilter
-          setFilter={this.setFilter}
-          initFilter={this.state.query}
-        />
-        <hr />
+        <Panel>
+          <Panel.Heading>
+            <Panel.Title toggle>
+              Filter
+            </Panel.Title>
+          </Panel.Heading>
+          <Panel.Collapse>
+            <Panel.Body>
+              <IssueFilter
+                setFilter={this.setFilter}
+                initFilter={this.state.query}
+              />
+            </Panel.Body>
+          </Panel.Collapse>
+        </Panel>
         <IssueTable issues={this.state.issues} deleteIssue={this.deleteIssue} />
-        <hr />
         <IssueAdd createIssue={this.createIssue} />
       </div>
     );
@@ -166,7 +175,7 @@ function IssueTable(props) {
   const issueRows = props.issues.map(issue =>
     <IssueRow key={issue._id} issue={issue} deleteIssue={props.deleteIssue} />);
   return (
-    <table className="bordered-table">
+    <Table bordered condensed hover responsive>
       <thead>
         <tr>
           <th>Id</th>
@@ -182,7 +191,7 @@ function IssueTable(props) {
       <tbody>
         {issueRows}
       </tbody>
-    </table>
+    </Table>
   );
 }
 
