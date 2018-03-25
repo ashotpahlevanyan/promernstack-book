@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Row, FormGroup, FormControl, ControlLabel, InputGroup,
-  ButtonToolbar, Button } from 'react-bootstrap';
+import {
+  Col, Row, FormGroup, FormControl,
+  ControlLabel, InputGroup, ButtonToolbar, Button,
+} from 'react-bootstrap';
 
 class IssueFilter extends React.Component { // eslint-disable-line
   constructor(props) {
@@ -104,14 +106,12 @@ class IssueFilter extends React.Component { // eslint-disable-line
               <FormControl
                 value={this.state.effort_gte}
                 onChange={this.onChangeEffortGte}
-              >
-              </FormControl>
+              />
               <InputGroup.Addon>-</InputGroup.Addon>
               <FormControl
                 value={this.state.effort_lte}
                 onChange={this.onChangeEffortLte}
-              >
-              </FormControl>
+              />
             </InputGroup>
           </FormGroup>
         </Col>

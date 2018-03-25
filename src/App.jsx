@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch, Link, withRouter /* Redirect */ } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, withRouter /* Link, Redirect */ } from 'react-router-dom';
 import IssueList from './IssueList.jsx';
 import IssueEdit from './IssueEdit.jsx';
 import { Home, Header, Footer } from './Common.jsx';
