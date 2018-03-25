@@ -29,6 +29,7 @@ class IssueList extends React.Component {
     this.createIssue = this.createIssue.bind(this);
     this.loadData = this.loadData.bind(this);
     this.setFilter = this.setFilter.bind(this);
+    this.deleteIssue = this.deleteIssue.bind(this);
 
     this.setFilter(this.state.query);
   }
@@ -108,6 +109,16 @@ class IssueList extends React.Component {
     });
   }
 
+  deleteIssue(id) {
+    fetch(`/api/issues/${id}`, { method: 'DELETE' }).then((response) => {
+      if(!response.ok) {
+        alert(`Failed to delete issue`);
+      } else {
+        this.loadData();
+      }
+    });
+  }
+
   render() {
     return (
       <div>
@@ -116,7 +127,7 @@ class IssueList extends React.Component {
           initFilter={this.state.query}
         />
         <hr />
-        <IssueTable issues={this.state.issues} />
+        <IssueTable issues={this.state.issues} deleteIssue={this.deleteIssue} />
         <hr />
         <IssueAdd createIssue={this.createIssue} />
       </div>
@@ -124,7 +135,11 @@ class IssueList extends React.Component {
   }
 }
 
-const IssueRow = props => (
+const IssueRow = (props) => {
+  function onDeleteClick() {
+    props.deleteIssue(props.issue._id);
+  }
+  return(
   <tr>
     <td>
       <Link to={`/issues/${props.issue._id}`}>{props.issue._id.substr(-4)}</Link>
@@ -135,11 +150,14 @@ const IssueRow = props => (
     <td>{props.issue.effort}</td>
     <td>{props.issue.completionDate ? props.issue.completionDate.toDateString() : ''}</td>
     <td>{props.issue.title}</td>
+    <td><button onClick={onDeleteClick}>Delete</button></td>
   </tr>
-);
+  );
+};
 
 function IssueTable(props) {
-  const issueRows = props.issues.map(issue => <IssueRow key={issue._id} issue={issue} />);
+  const issueRows = props.issues.map(issue =>
+    <IssueRow key={issue._id} issue={issue} deleteIssue={props.deleteIssue} />);
   return (
     <table className="bordered-table">
       <thead>
@@ -151,6 +169,7 @@ function IssueTable(props) {
           <th>Effort</th>
           <th>Completion date</th>
           <th>Title</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -170,11 +189,13 @@ IssueRow.propTypes = {
     effort: PropTypes.number,
     completionDate: PropTypes.string,
   }).isRequired,
+  deleteIssue: PropTypes.func.isRequired,
 };
 
 IssueTable.propTypes = {
   issues: PropTypes.arrayOf({
   }).isRequired,
+  deleteIssue: PropTypes.func.isRequired,
 };
 
 IssueList.propTypes = {
