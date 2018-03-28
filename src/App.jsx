@@ -1,7 +1,8 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import '../static/bootstrap/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.css';
+// import 'react-bootstrap';
 // //import '@fortawesome/fontawesome/styles.css';
 import { BrowserRouter as Router, Route, Switch, withRouter /* Link, Redirect */ } from 'react-router-dom';
 import IssueList from './IssueList.jsx';
