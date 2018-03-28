@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   FormGroup, FormControl, ControlLabel, ButtonToolbar,
-  Button, Panel, Form, Col,
+  Button, Panel, Form, Col, Alert
 } from 'react-bootstrap';
 
 import { LinkContainer } from 'react-router-bootstrap';
@@ -25,12 +25,15 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
         created: null,
       },
       invalidFields: {},
+      showingValidation: false,
     };
 
     this.onChange = this.onChange.bind(this);
     this.loadData = this.loadData.bind(this);
     this.onValidityChange = this.onValidityChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.dismissValidation = this.dismissValidation.bind(this);
+    this.showValidation = this.showValidation.bind(this);
   }
 
   componentDidMount() {
@@ -61,8 +64,17 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
     this.setState({ invalidFields });
   }
 
+  showValidation() {
+    this.setState({ showingValidation: true });
+  }
+
+  dismissValidation() {
+    this.setState({ showingValidation: false });
+  }
+
   onSubmit(event) {
     event.preventDefault();
+    this.showValidation();
 
     if (Object.keys(this.state.invalidFields).length !== 0) {
       return;
@@ -111,10 +123,18 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
 
   render() {
     const issue = this.state.issue;
-    const validationMessage = Object.keys(this.state.invalidFields)
-      .length === 0 ? null :
-      (<div className="error">Please correct invalid fields before submitting</div>);
-
+    let validationMessage = null;
+    if(Object.keys(this.state.invalidFields).length !== 0
+      && this.state.showingValidation) {
+      validationMessage = (
+        <Alert
+          bsStyle="danger"
+          onDismiss={this.dismissValidation}
+        >
+          Please correct invalid fields before submitting.
+        </Alert>
+      );
+    }
     return (
       <Panel>
         <Panel.Heading>Edit Issue</Panel.Heading>
@@ -206,7 +226,9 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
                 </ButtonToolbar>
               </Col>
             </FormGroup>
-            {validationMessage}
+            <FormGroup>
+              <Col smOffset={3} sm={9}>{validationMessage}</Col>
+            </FormGroup>
           </Form>
         </Panel.Body>
       </Panel>
