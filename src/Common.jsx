@@ -18,27 +18,30 @@ const Header = () => (
   <Navbar fluid>
     <Navbar.Header>
       <Navbar.Brand>{Brand}</Navbar.Brand>
+      <Navbar.Toggle />
     </Navbar.Header>
-    <Nav>
-      <LinkContainer to="/home">
-        <NavItem>Home</NavItem>
-      </LinkContainer>
-      <LinkContainer to="/issues">
-        <NavItem>Issues</NavItem>
-      </LinkContainer>
-      <LinkContainer to="/reports">
-        <NavItem>Reports</NavItem>
-      </LinkContainer>
-      <LinkContainer to="/articles">
-        <NavItem>Articles</NavItem>
-      </LinkContainer>
-    </Nav>
-    <Nav pullRight>
-      <IssueAddNavItem />
-      <NavDropdown id="user-dropdown" title={<FontAwesomeIcon icon={faEllipsisH} />} noCaret>
-        <MenuItem>Logout</MenuItem>
-      </NavDropdown>
-    </Nav>
+    <Navbar.Collapse>
+      <Nav>
+        <LinkContainer to="/home">
+          <NavItem>Home</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/issues">
+          <NavItem>Issues</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/reports">
+          <NavItem>Reports</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/articles">
+          <NavItem>Articles</NavItem>
+        </LinkContainer>
+      </Nav>
+      <Nav pullRight>
+        <IssueAddNavItem />
+        <NavDropdown id="user-dropdown" title={<FontAwesomeIcon icon={faEllipsisH} />} noCaret>
+          <MenuItem>Logout</MenuItem>
+        </NavDropdown>
+      </Nav>
+    </Navbar.Collapse>
   </Navbar>
 );
 
