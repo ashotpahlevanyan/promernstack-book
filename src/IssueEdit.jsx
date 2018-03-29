@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   FormGroup, FormControl, ControlLabel, ButtonToolbar,
-  Button, Panel, Form, Col, Alert
+  Button, Panel, Form, Col, Alert,
 } from 'react-bootstrap';
 
 import { LinkContainer } from 'react-router-bootstrap';
@@ -71,26 +71,6 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
     this.setState({ invalidFields });
   }
 
-  showValidation() {
-    this.setState({ showingValidation: true });
-  }
-
-  dismissValidation() {
-    this.setState({ showingValidation: false });
-  }
-
-  showSuccess(message) {
-    this.setState({ toastVisible: true, toastMessage: message, toastType: 'success' });
-  }
-
-  showError(message) {
-    this.setState({ toastVisible: true, toastMessage: message, toastType: 'danger' });
-  }
-
-  dismissToast() {
-    this.setState({ toastVisible: false });
-  }
-
   onSubmit(event) {
     event.preventDefault();
     this.showValidation();
@@ -140,10 +120,30 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
       });
   }
 
+  showValidation() {
+    this.setState({ showingValidation: true });
+  }
+
+  dismissValidation() {
+    this.setState({ showingValidation: false });
+  }
+
+  showSuccess(message) {
+    this.setState({ toastVisible: true, toastMessage: message, toastType: 'success' });
+  }
+
+  showError(message) {
+    this.setState({ toastVisible: true, toastMessage: message, toastType: 'danger' });
+  }
+
+  dismissToast() {
+    this.setState({ toastVisible: false });
+  }
+
   render() {
     const issue = this.state.issue;
     let validationMessage = null;
-    if(Object.keys(this.state.invalidFields).length !== 0
+    if (Object.keys(this.state.invalidFields).length !== 0
       && this.state.showingValidation) {
       validationMessage = (
         <Alert

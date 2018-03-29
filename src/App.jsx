@@ -1,17 +1,12 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import 'bootstrap/dist/css/bootstrap.css';
-// import 'react-bootstrap';
-// //import '@fortawesome/fontawesome/styles.css';
 import { BrowserRouter as Router, Route, Switch, withRouter /* Link, Redirect */ } from 'react-router-dom';
 import IssueList from './IssueList.jsx';
 import IssueEdit from './IssueEdit.jsx';
 import { Home, Header, Footer } from './Common.jsx';
 import NotFound from './NotFound.jsx';
 import Articles from './Articles.jsx';
-
-
 
 const contentNode = document.getElementById('contents');
 

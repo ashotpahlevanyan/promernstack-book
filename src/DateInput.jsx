@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 export default class DateInput extends React.Component {
   static displayFormat(date) {
-    return (date != null && date != '') ? new Date(date).toDateString() : '';
+    return (date != null && date !== '') ? new Date(date).toDateString() : '';
   }
 
   static editFormat(date) {
-    return (date != null  && date != '') ? (new Date(date)).toISOString().substr(0, 10) : '';
+    return (date != null && date !== '') ? (new Date(date)).toISOString().substr(0, 10) : '';
   }
 
   static unformat(str) {
