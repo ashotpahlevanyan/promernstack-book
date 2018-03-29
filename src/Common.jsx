@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faEllipsisH from '@fortawesome/fontawesome-free-solid/faEllipsisH';
 import IssueAddNavItem from './IssueAddNavItem.jsx';
@@ -11,13 +12,15 @@ const Home = () => (
   </div>
 );
 
+const Brand = <Link to="/home">Issue Tracker</Link>;
+
 const Header = () => (
   <Navbar fluid>
     <Navbar.Header>
-      <Navbar.Brand>Issue Tracker</Navbar.Brand>
+      <Navbar.Brand>{Brand}</Navbar.Brand>
     </Navbar.Header>
     <Nav>
-      <LinkContainer to="/">
+      <LinkContainer to="/home">
         <NavItem>Home</NavItem>
       </LinkContainer>
       <LinkContainer to="/issues">

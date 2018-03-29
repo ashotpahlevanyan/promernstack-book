@@ -16,7 +16,7 @@ const RoutedApp = () => (
       <Header />
       <hr />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/home" component={Home} />
         <Route exact path="/issues" component={withRouter(IssueList)} />
         <Route exact path="/issues/:id" component={IssueEdit} />
         <Route path="/articles" component={Articles} />
