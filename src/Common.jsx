@@ -2,8 +2,8 @@ import React from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
 import faEllipsisH from '@fortawesome/fontawesome-free-solid/faEllipsisH';
+import IssueAddNavItem from './IssueAddNavItem.jsx';
 
 const Home = () => (
   <div className="home">
@@ -31,7 +31,7 @@ const Header = () => (
       </LinkContainer>
     </Nav>
     <Nav pullRight>
-      <NavItem><FontAwesomeIcon icon={faPlus} /> Create Issue</NavItem>
+      <IssueAddNavItem />
       <NavDropdown id="user-dropdown" title={<FontAwesomeIcon icon={faEllipsisH} />} noCaret>
         <MenuItem>Logout</MenuItem>
       </NavDropdown>

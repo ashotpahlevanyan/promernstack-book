@@ -6,7 +6,7 @@ import { Button, Table, Panel } from 'react-bootstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt.js';
 
-import IssueAdd from './IssueAdd.jsx';
+// import IssueAdd from './IssueAdd.jsx';
 import IssueFilter from './IssueFilter.jsx';
 import Toast from './Toast.jsx';
 
@@ -33,7 +33,7 @@ class IssueList extends React.Component {
       toastMessage: '',
       toastType: 'success',
     };
-    this.createIssue = this.createIssue.bind(this);
+    // this.createIssue = this.createIssue.bind(this);
     this.loadData = this.loadData.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.deleteIssue = this.deleteIssue.bind(this);
@@ -101,30 +101,30 @@ class IssueList extends React.Component {
     });
   }
 
-  createIssue(newIssue) {
-    fetch('/api/issues/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newIssue),
-    }).then((response) => {
-      if (response.ok) {
-        response.json().then((updatedIssue) => {
-          updatedIssue.created = new Date(updatedIssue.created);
-          if (updatedIssue.completionDate) {
-            updatedIssue.completionDate = new Date(updatedIssue.completionDate);
-          }
-          const newIssues = this.state.issues.concat(updatedIssue);
-          this.setState({ issues: newIssues });
-        });
-      } else {
-        response.json().then((error) => {
-          this.showError(`Failed to add issue: ${error.message}`);
-        });
-      }
-    }).catch((err) => {
-      this.showError(`Error in sending Data to server : ${err.message}`);
-    });
-  }
+  // createIssue(newIssue) {
+  //   fetch('/api/issues/', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(newIssue),
+  //   }).then((response) => {
+  //     if (response.ok) {
+  //       response.json().then((updatedIssue) => {
+  //         updatedIssue.created = new Date(updatedIssue.created);
+  //         if (updatedIssue.completionDate) {
+  //           updatedIssue.completionDate = new Date(updatedIssue.completionDate);
+  //         }
+  //         const newIssues = this.state.issues.concat(updatedIssue);
+  //         this.setState({ issues: newIssues });
+  //       });
+  //     } else {
+  //       response.json().then((error) => {
+  //         this.showError(`Failed to add issue: ${error.message}`);
+  //       });
+  //     }
+  //   }).catch((err) => {
+  //     this.showError(`Error in sending Data to server : ${err.message}`);
+  //   });
+  // }
 
   deleteIssue(id) {
     fetch(`/api/issues/${id}`, { method: 'DELETE' }).then((response) => {
@@ -155,7 +155,6 @@ class IssueList extends React.Component {
           </Panel.Collapse>
         </Panel>
         <IssueTable issues={this.state.issues} deleteIssue={this.deleteIssue} />
-        <IssueAdd createIssue={this.createIssue} />
         <Toast
           showing={this.state.toastVisible}
           onDismiss={this.dismissToast}
