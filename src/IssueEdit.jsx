@@ -22,7 +22,7 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
         status: '',
         owner: '',
         effort: null,
-        completionDate: '',
+        completionDate: null,
         created: null,
       },
       invalidFields: {},
