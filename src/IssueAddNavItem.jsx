@@ -69,7 +69,6 @@ class IssueAddNavItem extends React.Component {
           this.showError(`Failed to add issue: ${error.message}`);
         });
       }
-      this.hideModal();
     }).catch((err) => {
       this.showError(`Error in sending data to server: ${err.message}`);
     });
@@ -101,7 +100,7 @@ class IssueAddNavItem extends React.Component {
               <Button type="button" bsStyle="primary" onClick={this.submit}>
                 Submit
               </Button>
-              <Button bsStyle="link" onClick={this.hideModal}>Cancel</Button>
+              <Button bsStyle="default" onClick={this.hideModal}>Cancel</Button>
             </ButtonToolbar>
           </Modal.Footer>
         </Modal>
