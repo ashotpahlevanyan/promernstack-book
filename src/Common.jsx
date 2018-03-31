@@ -62,7 +62,6 @@ class Header extends React.Component {
             <NavItem>
               <LinkContainer to="/articles"><NavLink>Articles</NavLink></LinkContainer>
             </NavItem>
-
             <IssueAddNavItem />
             <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.dropdownToggle}>
               <DropdownToggle id="user-dropdown" className="btn-link">

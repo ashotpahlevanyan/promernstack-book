@@ -2,7 +2,7 @@ import React from 'react';
 import 'whatwg-fetch';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Button, Table, Panel } from 'react-bootstrap';
+import { Button, Table, Card, CardTitle, CardBody, Collapse } from 'reactstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt.js';
 
@@ -32,6 +32,7 @@ class IssueList extends React.Component {
       toastVisible: false,
       toastMessage: '',
       toastType: 'success',
+      filterCollapse: false,
     };
     // this.createIssue = this.createIssue.bind(this);
     this.loadData = this.loadData.bind(this);
@@ -39,6 +40,7 @@ class IssueList extends React.Component {
     this.deleteIssue = this.deleteIssue.bind(this);
     this.showError = this.showError.bind(this);
     this.dismissToast = this.dismissToast.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
 
     this.setFilter(this.state.query);
   }
@@ -78,6 +80,11 @@ class IssueList extends React.Component {
     this.setState({ toastVisible: false });
   }
 
+  toggleFilter(e) {
+    e.preventDefault();
+    this.setState({ filterCollapse: !this.state.filterCollapse })
+  }
+
   loadData() {
     fetch(`/api/issues${this.props.location.search}`).then((response) => {
       if (response.ok) {
@@ -101,31 +108,6 @@ class IssueList extends React.Component {
     });
   }
 
-  // createIssue(newIssue) {
-  //   fetch('/api/issues/', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(newIssue),
-  //   }).then((response) => {
-  //     if (response.ok) {
-  //       response.json().then((updatedIssue) => {
-  //         updatedIssue.created = new Date(updatedIssue.created);
-  //         if (updatedIssue.completionDate) {
-  //           updatedIssue.completionDate = new Date(updatedIssue.completionDate);
-  //         }
-  //         const newIssues = this.state.issues.concat(updatedIssue);
-  //         this.setState({ issues: newIssues });
-  //       });
-  //     } else {
-  //       response.json().then((error) => {
-  //         this.showError(`Failed to add issue: ${error.message}`);
-  //       });
-  //     }
-  //   }).catch((err) => {
-  //     this.showError(`Error in sending Data to server : ${err.message}`);
-  //   });
-  // }
-
   deleteIssue(id) {
     fetch(`/api/issues/${id}`, { method: 'DELETE' }).then((response) => {
       if (!response.ok) {
@@ -139,21 +121,19 @@ class IssueList extends React.Component {
   render() {
     return (
       <div>
-        <Panel>
-          <Panel.Heading>
-            <Panel.Title toggle>
-              Filter
-            </Panel.Title>
-          </Panel.Heading>
-          <Panel.Collapse>
-            <Panel.Body>
+        <Card>
+          <CardBody>
+            <CardTitle onClick={this.toggleFilter} style={{ 'cursor': 'pointer' }}>
+              <Link to="" onClick={(e) => {e.preventDefault();}} style={{ 'text-decoration': 'none' }}>Filter</Link>
+            </CardTitle>
+            <Collapse isOpen={this.state.filterCollapse}>
               <IssueFilter
                 setFilter={this.setFilter}
                 initFilter={this.state.query}
               />
-            </Panel.Body>
-          </Panel.Collapse>
-        </Panel>
+            </Collapse>
+          </CardBody>
+        </Card>
         <IssueTable issues={this.state.issues} deleteIssue={this.deleteIssue} />
         <Toast
           showing={this.state.toastVisible}
@@ -194,7 +174,7 @@ function IssueTable(props) {
   const issueRows = props.issues.map(issue =>
     <IssueRow key={issue._id} issue={issue} deleteIssue={props.deleteIssue} />);
   return (
-    <Table bordered condensed hover responsive>
+    <Table striped bordered>
       <thead>
         <tr>
           <th>Id</th>

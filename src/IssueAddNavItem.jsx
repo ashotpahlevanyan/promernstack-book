@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
@@ -7,6 +7,7 @@ import {
   NavItem, Modal, Form, FormGroup,
   Label, Button, ModalHeader, ModalBody, ModalFooter, Input
 } from 'reactstrap';
+
 
 import Toast from './Toast.jsx';
 
@@ -28,7 +29,8 @@ class IssueAddNavItem extends React.Component {
     this.dismissToast = this.dismissToast.bind(this);
   }
 
-  showModal() {
+  showModal(e) {
+    e.preventDefault();
     this.setState({ showing: true });
   }
 
@@ -76,9 +78,11 @@ class IssueAddNavItem extends React.Component {
 
   render() {
     return (
-      <Link onClick={this.showModal}>
-        <FontAwesomeIcon icon={faPlus} />
-        &nbsp;Create Issue
+      <NavItem>
+        <Link to="" onClick={this.showModal}>
+          <FontAwesomeIcon icon={faPlus} />
+          &nbsp;Create Issue
+        </Link>
         <Modal isOpen={this.state.showing} toggle={this.hideModal}>
           <ModalHeader toggle={this.hideModal}>Create Issue</ModalHeader>
           <ModalBody>
@@ -95,10 +99,10 @@ class IssueAddNavItem extends React.Component {
           </ModalBody>
           <ModalFooter>
             <div>
-              <Button type="button" className="primary" onClick={this.submit}>
+              <Button type="button" color="primary" onClick={this.submit}>
                 Submit
-              </Button>
-              <Button className="default" onClick={this.hideModal}>Cancel</Button>
+              </Button>{' '}
+              <Button color="secondary" onClick={this.hideModal}>Cancel</Button>
             </div>
           </ModalFooter>
         </Modal>
@@ -108,7 +112,7 @@ class IssueAddNavItem extends React.Component {
           onDismiss={this.dismissToast}
           bsStyle={this.state.toastType}
         />
-      </Link>
+      </NavItem>
     );
   }
 }

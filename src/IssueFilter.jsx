@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Col, Row, FormGroup, FormControl,
-  ControlLabel, InputGroup, ButtonToolbar, Button,
-} from 'react-bootstrap';
+  Col, Row, FormGroup,
+  Label, InputGroup, Button, Input, InputGroupAddon
+} from 'reactstrap';
 
 class IssueFilter extends React.Component { // eslint-disable-line
   constructor(props) {
@@ -83,9 +83,9 @@ class IssueFilter extends React.Component { // eslint-disable-line
       <Row>
         <Col xs={6} sm={4} md={3} lg={2}>
           <FormGroup>
-            <ControlLabel>Status</ControlLabel>
-            <FormControl
-              componentClass="select"
+            <Label>Status</Label>
+            <Input
+              type="select"
               value={this.state.status}
               onChange={this.onChangeStatus}
             >
@@ -96,42 +96,48 @@ class IssueFilter extends React.Component { // eslint-disable-line
               <option value="Fixed">Fixed</option>
               <option value="Verified">Verified</option>
               <option value="Closed">Closed</option>
-            </FormControl>
+            </Input>
           </FormGroup>
         </Col>
         <Col xs={6} sm={4} md={3} lg={2}>
           <FormGroup>
-            <ControlLabel>Effort</ControlLabel>
+            <Label>Effort</Label>
             <InputGroup>
-              <FormControl
+              <Input
                 value={this.state.effort_gte}
                 onChange={this.onChangeEffortGte}
-              />
-              <InputGroup.Addon>-</InputGroup.Addon>
-              <FormControl
+              /><InputGroupAddon addonType="prepend append">-</InputGroupAddon>
+              <Input
                 value={this.state.effort_lte}
                 onChange={this.onChangeEffortLte}
-              />
+              />{' '}
             </InputGroup>
           </FormGroup>
         </Col>
         <Col xs={6} sm={4} md={3} lg={3}>
           <FormGroup>
-            <ControlLabel>&nbsp;</ControlLabel>
-            <ButtonToolbar>
-              <Button bsStyle="primary" onClick={this.applyFilter}>
-              Apply
-              </Button>
-              <Button
-                onClick={this.resetFilter}
-                disabled={!this.state.changed}
-              >
-                Reset
-              </Button>
-              <Button onClick={this.clearFilter}>
-                Clear
-              </Button>
-            </ButtonToolbar>
+            <Label>&nbsp;</Label>
+            <InputGroup>
+              <InputGroupAddon addonType="prepend">
+                <Button color="primary" onClick={this.applyFilter}>
+                Apply
+                </Button>{' '}
+              </InputGroupAddon>
+              <InputGroupAddon addonType="append">
+                <Button
+                  color="secondary"
+                  onClick={this.resetFilter}
+                  disabled={!this.state.changed}
+                >
+                  Reset
+                </Button>{' '}
+              </InputGroupAddon>
+              <InputGroupAddon addonType="append">
+                <Button color="info" onClick={this.clearFilter}>
+                  Clear
+                </Button>
+              </InputGroupAddon>
+            </InputGroup>
           </FormGroup>
         </Col>
       </Row>
