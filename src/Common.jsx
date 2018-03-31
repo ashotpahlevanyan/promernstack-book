@@ -1,9 +1,11 @@
 import React from 'react';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavLink, NavbarBrand, NavbarToggler, Collapse, Dropdown, DropdownMenu, DropdownItem, DropdownToggle } from 'reactstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faEllipsisH from '@fortawesome/fontawesome-free-solid/faEllipsisH';
+import faBars from '@fortawesome/fontawesome-free-solid/faBars';
+
 import IssueAddNavItem from './IssueAddNavItem.jsx';
 
 const Home = () => (
@@ -14,36 +16,68 @@ const Home = () => (
 
 const Brand = <Link to="/home">Issue Tracker</Link>;
 
-const Header = () => (
-  <Navbar fluid>
-    <Navbar.Header>
-      <Navbar.Brand>{Brand}</Navbar.Brand>
-      <Navbar.Toggle />
-    </Navbar.Header>
-    <Navbar.Collapse>
-      <Nav>
-        <LinkContainer to="/home">
-          <NavItem>Home</NavItem>
-        </LinkContainer>
-        <LinkContainer to="/issues">
-          <NavItem>Issues</NavItem>
-        </LinkContainer>
-        <LinkContainer to="/reports">
-          <NavItem>Reports</NavItem>
-        </LinkContainer>
-        <LinkContainer to="/articles">
-          <NavItem>Articles</NavItem>
-        </LinkContainer>
-      </Nav>
-      <Nav pullRight>
-        <IssueAddNavItem />
-        <NavDropdown id="user-dropdown" title={<FontAwesomeIcon icon={faEllipsisH} />} noCaret>
-          <MenuItem>Logout</MenuItem>
-        </NavDropdown>
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
-);
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.dropdownToggle = this.dropdownToggle.bind(this);
+
+    this.state = {
+      isOpen: false,
+      dropdownOpen: false,
+      collapsed: true,
+    };
+  }
+
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
+  dropdownToggle() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  }
+
+  render() {
+    return (
+      <Navbar expand="md">
+        <NavbarBrand>{Brand}</NavbarBrand>
+        <NavbarToggler onClick={this.toggle}><FontAwesomeIcon icon={faBars}/></NavbarToggler>
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav navbar>
+            <NavItem active>
+              <LinkContainer to="/home"><NavLink>Home</NavLink></LinkContainer>
+            </NavItem>
+            <NavItem>
+              <LinkContainer to="/issues"><NavLink>Issues</NavLink></LinkContainer>
+            </NavItem>
+            <NavItem>
+              <LinkContainer to="/reports"><NavLink>Reports</NavLink></LinkContainer>
+            </NavItem>
+            <NavItem>
+              <LinkContainer to="/articles"><NavLink>Articles</NavLink></LinkContainer>
+            </NavItem>
+
+            <IssueAddNavItem />
+            <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.dropdownToggle}>
+              <DropdownToggle id="user-dropdown" className="btn-link">
+                <FontAwesomeIcon icon={faEllipsisH}/>
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>Logout</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </Nav>
+        </Collapse>
+      </Navbar>
+    );
+  }
+}
 
 const Footer = () => (
   <div className="footer">
@@ -55,8 +89,9 @@ const Footer = () => (
   </div>
 );
 
+export default Header;
+
 export {
   Home,
-  Header,
   Footer,
 };

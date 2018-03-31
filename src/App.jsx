@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, withRouter /* Link, Redirect */ } from 'react-router-dom';
 import IssueList from './IssueList.jsx';
 import IssueEdit from './IssueEdit.jsx';
-import { Home, Header, Footer } from './Common.jsx';
+import Header, { Home, Footer } from './Common.jsx';
 import NotFound from './NotFound.jsx';
 import Articles from './Articles.jsx';
 

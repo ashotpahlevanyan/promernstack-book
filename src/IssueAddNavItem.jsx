@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
 import {
-  NavItem, Modal, Form, FormGroup, FormControl,
-  ControlLabel, Button, ButtonToolbar,
-} from 'react-bootstrap';
+  NavItem, Modal, Form, FormGroup,
+  Label, Button, ModalHeader, ModalBody, ModalFooter, Input
+} from 'reactstrap';
 
 import Toast from './Toast.jsx';
 
@@ -76,33 +76,31 @@ class IssueAddNavItem extends React.Component {
 
   render() {
     return (
-      <NavItem onClick={this.showModal}>
+      <Link onClick={this.showModal}>
         <FontAwesomeIcon icon={faPlus} />
         &nbsp;Create Issue
-        <Modal keyboard show={this.state.showing} onHide={this.hideModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Create Issue</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+        <Modal isOpen={this.state.showing} toggle={this.hideModal}>
+          <ModalHeader toggle={this.hideModal}>Create Issue</ModalHeader>
+          <ModalBody>
             <Form name="issueAdd">
               <FormGroup>
-                <ControlLabel>Title</ControlLabel>
-                <FormControl name="title" autoFocus />
+                <Label>Title</Label>
+                <Input name="title" autoFocus />
               </FormGroup>
               <FormGroup>
-                <ControlLabel>Owner</ControlLabel>
-                <FormControl name="owner" />
+                <Label>Owner</Label>
+                <Input name="owner" />
               </FormGroup>
             </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <ButtonToolbar>
-              <Button type="button" bsStyle="primary" onClick={this.submit}>
+          </ModalBody>
+          <ModalFooter>
+            <div>
+              <Button type="button" className="primary" onClick={this.submit}>
                 Submit
               </Button>
-              <Button bsStyle="default" onClick={this.hideModal}>Cancel</Button>
-            </ButtonToolbar>
-          </Modal.Footer>
+              <Button className="default" onClick={this.hideModal}>Cancel</Button>
+            </div>
+          </ModalFooter>
         </Modal>
         <Toast
           showing={this.state.toastVisible}
@@ -110,7 +108,7 @@ class IssueAddNavItem extends React.Component {
           onDismiss={this.dismissToast}
           bsStyle={this.state.toastType}
         />
-      </NavItem>
+      </Link>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Collapse } from 'react-bootstrap';
+import { Alert, Collapse } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 export default class Toast extends React.Component {
@@ -15,7 +15,7 @@ export default class Toast extends React.Component {
 
   render() {
     return (
-      <Collapse in={this.props.showing}>
+      <Collapse isOpen={this.props.showing}>
         <div style={{
           position: 'fixed',
           top: 30,
@@ -26,8 +26,9 @@ export default class Toast extends React.Component {
         >
           <Alert
             style={{ display: 'inline-block', width: 500 }}
-            bsStyle={this.props.bsStyle}
-            onDismiss={this.props.onDismiss}
+            color={this.props.bsStyle}
+            toggle={this.props.onDismiss}
+            isOpen={true}
           >
             {this.props.message}
           </Alert>
@@ -40,10 +41,10 @@ export default class Toast extends React.Component {
 Toast.propTypes = {
   showing: PropTypes.bool.isRequired,
   onDismiss: PropTypes.func.isRequired,
-  bsStyle: PropTypes.string,
+  color: PropTypes.string,
   message: PropTypes.shape({}).isRequired,
 };
 
 Toast.defaultProps = {
-  bsStyle: 'success',
+  color: 'success',
 };
