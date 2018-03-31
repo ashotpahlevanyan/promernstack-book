@@ -78,8 +78,8 @@ class IssueAddNavItem extends React.Component {
 
   render() {
     return (
-      <NavItem>
-        <Link to="" onClick={this.showModal}>
+      <NavItem className="float-right d-flex align-items-center">
+        <Link to="" onClick={this.showModal} style={{ 'text-decoration': 'none' }}>
           <FontAwesomeIcon icon={faPlus} />
           &nbsp;Create Issue
         </Link>

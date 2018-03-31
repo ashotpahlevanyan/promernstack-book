@@ -49,7 +49,7 @@ class Header extends React.Component {
         <NavbarBrand>{Brand}</NavbarBrand>
         <NavbarToggler onClick={this.toggle}><FontAwesomeIcon icon={faBars}/></NavbarToggler>
         <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav navbar>
+          <Nav navbar className="float-left">
             <NavItem active>
               <LinkContainer to="/home"><NavLink>Home</NavLink></LinkContainer>
             </NavItem>
@@ -62,9 +62,11 @@ class Header extends React.Component {
             <NavItem>
               <LinkContainer to="/articles"><NavLink>Articles</NavLink></LinkContainer>
             </NavItem>
+          </Nav>
+          <Nav className="float-right">
             <IssueAddNavItem />
             <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.dropdownToggle}>
-              <DropdownToggle id="user-dropdown" className="btn-link">
+              <DropdownToggle id="user-dropdown" color="link">
                 <FontAwesomeIcon icon={faEllipsisH}/>
               </DropdownToggle>
               <DropdownMenu>

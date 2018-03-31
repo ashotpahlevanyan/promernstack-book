@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  FormGroup, FormControl, ControlLabel, ButtonToolbar,
-  Button, Panel, Form, Col, Alert,
-} from 'react-bootstrap';
+  FormGroup, Input, Label, ButtonGroup,
+  Button, Card, Form, Row, Col, Alert, CardTitle, CardBody, FormFeedback
+} from 'reactstrap';
 
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -147,7 +147,7 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
       && this.state.showingValidation) {
       validationMessage = (
         <Alert
-          bsStyle="danger"
+          color="danger"
           onDismiss={this.dismissValidation}
         >
           Please correct invalid fields before submitting.
@@ -155,29 +155,28 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
       );
     }
     return (
-      <Panel>
-        <Panel.Heading>Edit Issue</Panel.Heading>
-        <Panel.Body>
+      <Card>
+        <CardBody>
+          <CardTitle>Edit Issue</CardTitle>
           <Form horizontal onSubmit={this.onSubmit}>
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={3}>ID</Col>
+            <Row tag={FormGroup}>
+              <Col tag={Label} sm={3}>ID</Col>
               <Col sm={9}>
-                <FormControl.Static>{issue._id}</FormControl.Static>
+                <Input plaintext>{issue._id}</Input>
               </Col>
-            </FormGroup>
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={3}>Created</Col>
+            </Row>
+            <Row tag={FormGroup}>
+              <Col tag={Label} sm={3}>Created</Col>
               <Col sm={9}>
-                <FormControl.Static>
-                  {issue.created ? issue.created.toDateString() : ''}
-                </FormControl.Static>
+                <Input type="text" value={issue.created ? issue.created.toDateString() : ''}
+                />
               </Col>
-            </FormGroup>
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={3}>Status</Col>
+            </Row>
+            <Row tag={FormGroup}>
+              <Col tag={Label} sm={3}>Status</Col>
               <Col sm={9}>
-                <FormControl
-                  componentClass="select"
+                <Input
+                  type="select"
                   name="status"
                   value={issue.status}
                   onChange={this.onChange}
@@ -188,75 +187,76 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
                   <option value="Fixed">Fixed</option>
                   <option value="Verified">Verified</option>
                   <option value="Closed">Closed</option>
-                </FormControl>
+                </Input>
               </Col>
-            </FormGroup>
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={3}>Owner</Col>
+            </Row>
+            <Row tag={FormGroup}>
+              <Col tag={Label} sm={3}>Owner</Col>
               <Col sm={9}>
-                <FormControl
+                <Input
                   name="owner"
                   value={issue.owner}
                   onChange={this.onChange}
                 />
               </Col>
-            </FormGroup>
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={3}>Effort</Col>
+            </Row>
+            <Row tag={FormGroup}>
+              <Col tag={Label} sm={3}>Effort</Col>
               <Col sm={9}>
-                <FormControl
-                  componentClass={NumInput}
+                <Input
+                  tag={NumInput}
                   name="effort"
                   value={issue.effort}
                   onChange={this.onChange}
                 />
               </Col>
-            </FormGroup>
-            <FormGroup validationState={this.state.invalidFields.completionDate ? 'error' : ''}>
-              <Col componentClass={ControlLabel} sm={3}>Completion Date</Col>
+            </Row>
+            <Row tag={FormGroup} validationState={this.state.invalidFields.completionDate ? 'error' : ''}>
+              <Col tag={Label} sm={3}>Completion Date</Col>
               <Col sm={9}>
-                <FormControl
-                  componentClass={DateInput}
+                <Input
+                  tag={DateInput}
                   name="completionDate"
                   value={issue.completionDate}
                   onChange={this.onChange}
                   onValidityChange={this.onValidityChange}
                 />
-                <FormControl.Feedback />
+                <FormFeedback />
               </Col>
-            </FormGroup>
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={3}>Title</Col>
+            </Row>
+            <Row tag={FormGroup}>
+              <Col tag={Label} sm={3}>Title</Col>
               <Col sm={9}>
-                <FormControl
+                <Input
                   name="title"
                   value={issue.title}
                   onChange={this.onChange}
                 />
               </Col>
-            </FormGroup>
-            <FormGroup>
-              <Col smOffset={3} sm={6}>
-                <ButtonToolbar>
-                  <Button bsStyle="primary" type="submit">Submit</Button>
+            </Row>
+            <Row tag={FormGroup}>
+              <Col sm={12}>
+                <div className="d-flex justify-content-center">
+                  <Button color="primary" type="submit">Submit</Button>
+                  {' '}
                   <LinkContainer to="/issues">
-                    <Button bsStyle="link">Back</Button>
+                    <Button color="secondary">Back</Button>
                   </LinkContainer>
-                </ButtonToolbar>
+                </div>
               </Col>
-            </FormGroup>
-            <FormGroup>
-              <Col smOffset={3} sm={9}>{validationMessage}</Col>
-            </FormGroup>
+            </Row>
+            <Row tag={FormGroup}>
+              <Col offset={3} sm={9}>{validationMessage}</Col>
+            </Row>
           </Form>
           <Toast
             message={this.state.toastMessage}
-            bsStyle={this.state.toastType}
+            color={this.state.toastType}
             showing={this.state.toastVisible}
             onDismiss={this.dismissToast}
           />
-        </Panel.Body>
-      </Panel>
+        </CardBody>
+      </Card>
     );
   }
 }
