@@ -121,7 +121,7 @@ class IssueList extends React.Component {
   render() {
     return (
       <div>
-        <Card>
+        <Card id="issueFilter">
           <CardBody>
             <CardTitle onClick={this.toggleFilter} style={{ 'cursor': 'pointer' }}>
               <Link to="" onClick={(e) => {e.preventDefault();}} style={{ 'text-decoration': 'none' }}>Filter</Link>

@@ -22,11 +22,11 @@ class Header extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.dropdownToggle = this.dropdownToggle.bind(this);
+    this.onBlur = this.onBlur.bind(this);
 
     this.state = {
       isOpen: false,
       dropdownOpen: false,
-      collapsed: true,
     };
   }
 
@@ -43,13 +43,17 @@ class Header extends React.Component {
     });
   }
 
+  onBlur() {
+    this.setState({ isOpen: false });
+  }
+
   render() {
     return (
-      <Navbar expand="md">
+      <Navbar expand="md" onBlur={this.onBlur}>
         <NavbarBrand>{Brand}</NavbarBrand>
         <NavbarToggler onClick={this.toggle}><FontAwesomeIcon icon={faBars}/></NavbarToggler>
-        <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav navbar className="float-left">
+        <Collapse isOpen={this.state.isOpen} navbar  style={{ 'justify-content': 'space-between' }}>
+          <Nav navbar>
             <NavItem active>
               <LinkContainer to="/home"><NavLink>Home</NavLink></LinkContainer>
             </NavItem>
@@ -63,7 +67,7 @@ class Header extends React.Component {
               <LinkContainer to="/articles"><NavLink>Articles</NavLink></LinkContainer>
             </NavItem>
           </Nav>
-          <Nav className="float-right">
+          <Nav>
             <IssueAddNavItem />
             <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.dropdownToggle}>
               <DropdownToggle id="user-dropdown" color="link">

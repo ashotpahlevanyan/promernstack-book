@@ -105,7 +105,7 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
         if (response.ok) {
           response.json().then((issue) => {
             issue.created = new Date(issue.created);
-            issue.completionDate = issue.completionDate != null ?
+            issue.completionDate = (issue.completionDate != null) ?
               new Date(issue.completionDate).toDateString() : '';
             // issue.effort = issue.effort != null ? issue.effort.toString() : '';
             this.setState({ issue });
@@ -155,7 +155,7 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
       );
     }
     return (
-      <Card>
+      <Card id="issueEdit">
         <CardBody>
           <CardTitle>Edit Issue</CardTitle>
           <Form horizontal onSubmit={this.onSubmit}>
@@ -236,9 +236,8 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
             </Row>
             <Row tag={FormGroup}>
               <Col sm={12}>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center buttonsContainer">
                   <Button color="primary" type="submit">Submit</Button>
-                  {' '}
                   <LinkContainer to="/issues">
                     <Button color="secondary">Back</Button>
                   </LinkContainer>

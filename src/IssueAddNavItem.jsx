@@ -89,7 +89,7 @@ class IssueAddNavItem extends React.Component {
             <Form name="issueAdd">
               <FormGroup>
                 <Label>Title</Label>
-                <Input name="title" autoFocus />
+                <Input name="title" autoFocus={true} />
               </FormGroup>
               <FormGroup>
                 <Label>Owner</Label>
