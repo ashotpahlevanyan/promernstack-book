@@ -105,7 +105,7 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
         if (response.ok) {
           response.json().then((issue) => {
             issue.created = new Date(issue.created);
-            issue.completionDate = (issue.completionDate != null) ?
+            issue.completionDate = (issue.completionDate != null && issue.completionDate != '') ?
               new Date(issue.completionDate).toDateString() : '';
             // issue.effort = issue.effort != null ? issue.effort.toString() : '';
             this.setState({ issue });

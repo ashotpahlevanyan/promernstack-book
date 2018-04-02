@@ -70,10 +70,10 @@ class Header extends React.Component {
           <Nav>
             <IssueAddNavItem />
             <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.dropdownToggle}>
-              <DropdownToggle id="user-dropdown" color="link">
+              <DropdownToggle id="user-dropdown" nav color="link">
                 <FontAwesomeIcon icon={faEllipsisH}/>
               </DropdownToggle>
-              <DropdownMenu>
+              <DropdownMenu right>
                 <DropdownItem>Logout</DropdownItem>
               </DropdownMenu>
             </Dropdown>
