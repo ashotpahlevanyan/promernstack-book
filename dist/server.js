@@ -6,10 +6,6 @@ var _sourceMapSupport2 = _interopRequireDefault(_sourceMapSupport);
 
 require('babel-polyfill');
 
-var _path = require('path');
-
-var _path2 = _interopRequireDefault(_path);
-
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
@@ -22,8 +18,13 @@ var _issue = require('./issue');
 
 var _issue2 = _interopRequireDefault(_issue);
 
+var _renderedPageRouter = require('./renderedPageRouter.jsx');
+
+var _renderedPageRouter2 = _interopRequireDefault(_renderedPageRouter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import path from 'path';
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 
@@ -143,9 +144,11 @@ app.delete('/api/issues/:id', (req, res) => {
   });
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(_path2.default.resolve('static/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve('static/index.html'));
+// });
+
+app.use('/', _renderedPageRouter2.default);
 
 MongoClient.connect('mongodb://localhost/issuetracker').then(connection => {
   db = connection.db('issuetracker');

@@ -2,10 +2,11 @@ import SourceMapSupport from 'source-map-support';
 
 import 'babel-polyfill';
 
-import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
 import Issue from './issue';
+
+import renderedServerRouter from './renderedPageRouter.jsx';
 
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
@@ -140,9 +141,7 @@ app.delete('/api/issues/:id', (req, res) => {
     });
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve('static/index.html'));
-});
+app.use('/', renderedServerRouter);
 
 MongoClient.connect('mongodb://localhost/issuetracker').then((connection) => {
   db = connection.db('issuetracker');

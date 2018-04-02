@@ -13,10 +13,7 @@
     "watch": "webpack-dev-server  --hot --inline",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon -w server dist/server.js",
-    "compile-server": "babel server --presets es2015-node --out-dir dist --source-maps",
-    "watch-server": "babel server --presets es2015-node --out-dir dist --source-maps --watch",
-    "start-hook": "nodemon -w server server/start_hook.js",
-    "dev": "npm run watch & npm run look & npm run watch-server & npm start",
+    "start-hook": "nodemon -e js,jsx -w server,src server/start_hook.js",
     "dev-all-hook": "npm run watch & npm run look & npm run start-hook",
     "lint": "eslint --ext js,jsx src server webpack.config.js",
     "lint-watch": "esw --ext js,jsx src server webpack.config.js -w"

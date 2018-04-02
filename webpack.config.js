@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
 
   entry: {
-    app: ['./src/App.jsx'],
+    app: ['./client/Client.jsx'],
     // vendor: ['react', 'react-dom', 'whatwg-fetch', 'react-router'],
   },
   devtool: 'inline-source-map',
@@ -12,7 +12,7 @@ module.exports = {
     port: 8000,
     contentBase: 'static',
     proxy: {
-      '/api/**': {
+      '**': {
         target: 'http://localhost:3000/',
       },
     },

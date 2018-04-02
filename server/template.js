@@ -1,4 +1,5 @@
-<!DOCTYPE HTML>
+export default function template(body) {
+  return `<!DOCTYPE HTML>
 <html>
 <head>
 	<meta charset="UTF-8" />
@@ -27,8 +28,10 @@
 	</style>
 </head>
 <body>
-	<div id="contents"></div>
+	<div id="contents">${body}</div>
 	<script type='text/javascript' src="/vendor.js"></script>
 	<script type='text/javascript' src="/app.js"></script>
 </body>
 </html>
+`;
+}
