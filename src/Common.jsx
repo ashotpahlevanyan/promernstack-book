@@ -14,8 +14,6 @@ const Home = () => (
   </div>
 );
 
-const Brand = <Link to="/home">Issue Tracker</Link>;
-
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -49,8 +47,8 @@ class Header extends React.Component {
 
   render() {
     return (
-      <Navbar expand="md" onBlur={this.onBlur}>
-        <NavbarBrand>{Brand}</NavbarBrand>
+      <Navbar expand="md" light onBlur={this.onBlur} style={{ 'background-color': '#abcdef' }}>
+        <NavbarBrand tag={Link} to="/home" href="/home" style={{ 'text-decoration': 'none' }}>Issue Tracker</NavbarBrand>
         <NavbarToggler onClick={this.toggle}><FontAwesomeIcon icon={faBars}/></NavbarToggler>
         <Collapse isOpen={this.state.isOpen} navbar  style={{ 'justify-content': 'space-between' }}>
           <Nav navbar>
