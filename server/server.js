@@ -1,6 +1,6 @@
-import SourceMapSupport from 'source-map-support';
-
-import 'babel-polyfill';
+// import SourceMapSupport from 'source-map-support';
+//
+// import 'babel-polyfill';
 
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -8,10 +8,10 @@ import Issue from './issue';
 
 import renderedServerRouter from './renderedPageRouter.jsx';
 
-const MongoClient = require('mongodb').MongoClient;
+// const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 
-SourceMapSupport.install();
+// SourceMapSupport.install();
 
 const app = express();
 app.use(express.static('static'));
@@ -143,11 +143,21 @@ app.delete('/api/issues/:id', (req, res) => {
 
 app.use('/', renderedServerRouter);
 
-MongoClient.connect('mongodb://localhost/issuetracker').then((connection) => {
-  db = connection.db('issuetracker');
-  app.listen(3000, () => {
-    console.log('App started on port 3000');
-  });
-}).catch((error) => {
-  console.log('ERROR:', error);
-});
+// MongoClient.connect('mongodb://localhost/issuetracker').then((connection) => {
+//   db = connection.db('issuetracker');
+//   app.listen(3000, () => {
+//     console.log('App started on port 3000');
+//   });
+// }).catch((error) => {
+//   console.log('ERROR:', error);
+// });
+
+
+function setDb(newDb) {
+  db = newDb;
+}
+
+export {
+  app,
+  setDb
+};

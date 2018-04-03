@@ -1,8 +1,11 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   target: 'node',
-  entry: './server/server.js',
+  entry: ['./server/index.js', './node_modules/webpack/hot/poll?1000'],
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'server.bundle.js',
@@ -12,6 +15,14 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   externals: [/^[a-z]/],
+  plugins: [
+    new CleanWebpackPlugin([path.resolve(__dirname, './dist')]),
+    new HtmlWebpackPlugin({
+      title: 'Hot Module Replacement'
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     rules: [
       {
@@ -31,5 +42,5 @@ module.exports = {
       },
     ],
   },
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 };
