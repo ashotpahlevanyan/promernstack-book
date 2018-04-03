@@ -11,7 +11,7 @@ export default class HelloWorld extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({ addressee: 'Universe'});
-    }, 100)
+    }, 100);
   }
 
   render() {
