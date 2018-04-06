@@ -1,5 +1,5 @@
 import React from 'react';
-import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Button, Table, Card, CardTitle, CardBody, Collapse } from 'reactstrap';
@@ -19,11 +19,20 @@ class IssueList extends React.Component {
     return searchQuery;
   }
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
+
+    const issues = context.initialState.data.records;
+
+    issues.forEach(issue => {
+      issue.created = new Date(issue.created);
+      if (issue.completionDate) {
+        issue.completionDate = new Date(issue.completionDate);
+      }
+    });
 
     this.state = {
-      issues: [],
+      issues,
       query: {
         status: '',
         effort_gte: '',
@@ -211,6 +220,10 @@ IssueTable.propTypes = {
   issues: PropTypes.arrayOf({
   }).isRequired,
   deleteIssue: PropTypes.func.isRequired,
+};
+
+IssueList.contextTypes = {
+  initialState: PropTypes.shape({}),
 };
 
 IssueList.propTypes = {

@@ -12,19 +12,16 @@ import DateInput from './DateInput.jsx';
 import Toast from './Toast.jsx';
 
 export default class IssueEdit extends React.Component { // eslint-disable-line
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
+
+    const issue = context.initialState.data;
+    issue.created = new Date(issue.created);
+    issue.completionDate = issue.completionDate != null ?
+      new Date(issue.completionDate) : null;
 
     this.state = {
-      issue: {
-        _id: '',
-        title: '',
-        status: '',
-        owner: '',
-        effort: null,
-        completionDate: null,
-        created: null,
-      },
+      issue,
       invalidFields: {},
       showingValidation: false,
       toastVisible: false,
@@ -259,6 +256,10 @@ export default class IssueEdit extends React.Component { // eslint-disable-line
     );
   }
 }
+
+IssueEdit.contextTypes = {
+  initialState: PropTypes.shape({}),
+};
 
 IssueEdit.propTypes = {
   match: PropTypes.shape({
